@@ -10480,3 +10480,12 @@ form .row:first-child .floating-label-form-group {
 .bgbody{
     background-color: #ccffff !important;
   }
+
+.profile-card__img {
+  width: 200px;
+  height: 200px;
+  top: 60px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z-index: 4;
+  box-shadow: 0px 5px 50px 0px #301be9, 0px 0px 0px 7px rgba(54, 139, 230, 0.5);
